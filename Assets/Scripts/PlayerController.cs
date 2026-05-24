@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+    public float mouseSensitivity = 1000f;
+    private float xRotation = 1f;
 
     void Start()
     {
@@ -40,6 +42,12 @@ public class PlayerController : MonoBehaviour
         // Применение гравитации
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        xRotation -= mouseX;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        transform.Rotate(Vector3.up * mouseX);
+
     }
 
 }
