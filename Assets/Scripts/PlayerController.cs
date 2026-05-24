@@ -5,12 +5,15 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
+    public int maxJumps = 2;
+    
 
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
     public float mouseSensitivity = 1000f;
     private float xRotation = 1f;
+    private int jumpsleft;
 
     void Start()
     {
@@ -21,9 +24,13 @@ public class PlayerController : MonoBehaviour
     {
         // Проверка, стоит ли персонаж на земле
         isGrounded = controller.isGrounded;
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded )
         {
-            velocity.y = -2f;
+            jumpsleft = maxJumps;
+            if (velocity.y  < 0)
+            {
+                velocity.y = -2f;
+            }           
         }
 
         // Получение ввода игрока
@@ -34,9 +41,10 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
         // Прыжок
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && jumpsleft > 0)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            jumpsleft--;
         }
 
         // Применение гравитации
