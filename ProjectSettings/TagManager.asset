@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Slippery
+  - lever
+  - button
+  - platform
   layers:
   - Default
   - TransparentFX
