@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
-    public int maxJumps = 2;
+    public int maxJumps = 4;
     
 
     private CharacterController controller;
@@ -57,5 +57,19 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
     }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("Slippery"))
+        {
+            speed = 2f; // Уменьшаем скорость на льду
+            velocity.x *= 1.2f; // Добавляем эффект скольжения
+        }
+        else
+        {
+            speed = 5f; // Обычная скорость
+        }
+    }
+
 
 }
