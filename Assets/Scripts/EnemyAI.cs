@@ -14,6 +14,11 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(player == null)
+        {
+            return;
+        }
+
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance < chaseRange)

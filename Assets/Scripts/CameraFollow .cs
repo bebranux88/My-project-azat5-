@@ -9,6 +9,10 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
+        if(target == null)
+        {
+            return;
+        }
         // Перемещение камеры
         Vector3 desiredPosition = target.position + target.TransformDirection(offset);
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
