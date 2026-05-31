@@ -8,6 +8,7 @@ TagManager:
   - lever
   - button
   - platform
+  - Enemy
   layers:
   - Default
   - TransparentFX
